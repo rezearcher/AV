@@ -39,12 +39,11 @@ jobs:
       - name: Deploy to Google Cloud Functions
         run: |
           gcloud builds submit --config cloudbuild.yaml
-        # Log deployment status, if possible capture output or status
-      - run: echo "Deployment completed"
-
-      # Additional step to diagnose any failure by showing last few lines of logs
+        # Check if gcloud commands are configured and authenticated properly
       - name: Diagnose deployment
         if: failure()  # This step will run only if the previous step fails
         run: |
-          echo "Deployment failed. Here's the cloud build logs:"
-          gcloud builds log $(gcloud builds list --limit 1 --format='value(id)')
+          echo "Deployment failed. Showing recent gcloud auth list and projects:"
+          gcloud auth list
+          gcloud projects list
+
