@@ -31,9 +31,9 @@ jobs:
       - name: Log authentication status
         run: gcloud auth list
         
-
       - name: Set Google Cloud Project
         run: gcloud config set project ${{ secrets.GCP_PROJECT }}
+
         # Confirm and log current project configuration
       - run: gcloud config list project
         name: Log current project
