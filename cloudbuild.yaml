@@ -1,0 +1,19 @@
+steps:
+  # Install dependencies
+  - name: 'python:3.9'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'pip install -r src/requirements.txt'
+
+  # Run tests
+  - name: 'python:3.9'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'python -m unittest discover -s tests -p "*_test.py"'
+
+  # Deploy function
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['functions', 'deploy', 'MyFlaskFunction', '--runtime', 'python39', '--trigger-http', '--allow-unauthenticated', '--entry-point', 'main', '--source', '.']
+timeout: '1600s'
