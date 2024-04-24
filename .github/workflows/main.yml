@@ -9,21 +9,42 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      
+      - name: Checkout code
+        uses: actions/checkout@v4
+        # Logging the branch and commit info
+      - run: echo "Checked out $(git branch --show-current) at $(git log -1 --format=%H)"
+
       - name: Setup Google Cloud CLI
         uses: google-github-actions/setup-gcloud@v2.1.0
         with:
-          version: 'latest'  # This refers to the Google Cloud SDK version
+          version: 'latest'
+        # Log the gcloud version
+      - run: gcloud --version
+        name: Log gcloud version
 
       - name: Authenticate Google Cloud CLI
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
-      
+        # Verify and log authentication
+      - run: gcloud auth list
+        name: Log authentication status
+
       - name: Set Google Cloud Project
         run: gcloud config set project ${{ secrets.GCP_PROJECT }}
+        # Confirm and log current project configuration
+      - run: gcloud config list project
+        name: Log current project
 
       - name: Deploy to Google Cloud Functions
         run: |
           gcloud builds submit --config cloudbuild.yaml
+        # Log deployment status, if possible capture output or status
+      - run: echo "Deployment completed"
+
+      # Additional step to diagnose any failure by showing last few lines of logs
+      - name: Diagnose deployment
+        if: failure()  # This step will run only if the previous step fails
+        run: |
+          echo "Deployment failed. Here's the cloud build logs:"
+          gcloud builds log $(gcloud builds list --limit 1 --format='value(id)')
