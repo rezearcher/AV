@@ -3,7 +3,7 @@ name: Deploy 2 Google Cloud Functions
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
