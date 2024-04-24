@@ -19,15 +19,15 @@ jobs:
         with:
           version: 'latest'
         # Log the gcloud version
-      - run: gcloud --version
-        name: Log gcloud version
-
+      - name: Log gcloud version
+        run: gcloud --version
+        
       - name: Authenticate Google Cloud CLI
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
         
-          # Verify and log authentication
+        # Verify and log authentication
       - name: Log authentication status
         run: gcloud auth list
         
