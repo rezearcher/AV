@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Set up Google Cloud
-        uses: google-github-actions/setup-gcloud@vlatest
+        uses: google-github-actions/setup-gcloud@latest
         with:
           version: 'latest'
           service_account_key: ${{ secrets.GCP_SA_KEY }}
