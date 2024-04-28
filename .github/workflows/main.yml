@@ -30,9 +30,6 @@ jobs:
       - name: Log gcloud version
         run: gcloud --version
 
-      - name: Set Google Cloud Project
-        run: gcloud config set project ${{ secrets.GCP_PROJECT }}
-
       - name: Deploy to Google Cloud Functions
         run: gcloud builds submit --config cloudbuild.yaml
 
