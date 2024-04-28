@@ -19,10 +19,16 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
+      - name: Set PATH explicitly
+        run: echo "/opt/hostedtoolcache/gcloud/472.0.0/x64/bin:$PATH" >> $GITHUB_ENV
+        
       - name: Setup Google Cloud CLI
         uses: google-github-actions/setup-gcloud@v2
         with:
           version: 'latest'  # Consider specifying a stable version known to work locally
+
+      - name: Print running script content
+        run: cat $RUNNER_WORKSPACE/_temp/*.sh
 
       - name: Log gcloud version
         run: gcloud --version
