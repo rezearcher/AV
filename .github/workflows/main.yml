@@ -27,9 +27,6 @@ jobs:
         with:
           version: 'latest'  # Consider specifying a stable version known to work locally
 
-      - name: Print running script content
-        run: cat $RUNNER_WORKSPACE/_temp/*.sh
-
       - name: Log gcloud version
         run: gcloud --version
 
