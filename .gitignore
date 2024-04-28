@@ -1,0 +1,37 @@
+# Compiled Python files
+*.pyc
+__pycache__/
+
+# macOS system files
+.DS_Store
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Environment files
+.env
+
+# Virtual environment
+venv/
+env/
+
+# Node modules
+node_modules/
+
+# Dist/build folders
+dist/
+build/
+
+# Ignore all files in a directory (example: ignoring ai_script_generation for now)
+/src/ai_script_generation/*
+/src/backend/*
+/src/video_editing/*
+
+# Ignore all service account keys
+autovideo-*.json
+
+
+# You might also want to ignore specific files in other directories
+# that are not ready or are just placeholders
