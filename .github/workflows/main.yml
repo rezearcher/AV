@@ -19,9 +19,9 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      - name: Set PATH explicitly
+      - name: Append to PATH
         run: echo "/opt/hostedtoolcache/gcloud/472.0.0/x64/bin:$PATH" >> $GITHUB_ENV
-        
+         
       - name: Setup Google Cloud CLI
         uses: google-github-actions/setup-gcloud@v2
         with:
@@ -34,9 +34,7 @@ jobs:
         run: gcloud --version
 
       - name: Set Google Cloud Project
-        run: |
-          echo ${{ secrets.GCP_SA_KEY }} | gcloud auth activate-service-account --key-file=-
-          gcloud config set project ${{ secrets.GCP_PROJECT }}
+        run: gcloud config set project ${{ secrets.GCP_PROJECT }}
 
       - run: gcloud config list project
         name: Log current project
