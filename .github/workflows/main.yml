@@ -19,8 +19,8 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      - name: Append to PATH
-        run: echo "/opt/hostedtoolcache/gcloud/472.0.0/x64/bin:$PATH" >> $GITHUB_ENV
+      - name: Set PATH for gcloud
+        run: echo "PATH=/opt/hostedtoolcache/gcloud/472.0.0/x64/bin:$PATH" >> $GITHUB_ENV
          
       - name: Setup Google Cloud CLI
         uses: google-github-actions/setup-gcloud@v2
