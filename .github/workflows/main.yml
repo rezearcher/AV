@@ -30,6 +30,9 @@ jobs:
       - name: Log gcloud version
         run: gcloud --version
 
+      - name: Verify project setting
+        run: gcloud config get-value project
+
       - name: Set Google Cloud Project
         run: gcloud config set project ${{ secrets.GCP_PROJECT }}
 
