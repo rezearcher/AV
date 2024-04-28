@@ -14,18 +14,18 @@ jobs:
 
       - run: echo "Checked out $(git branch --show-current) at $(git log -1 --format=%H)"
 
+      - name: Authenticate Google Cloud CLI
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
       - name: Setup Google Cloud CLI
-        uses: google-github-actions/setup-gcloud@v2.1.0
+        uses: google-github-actions/setup-gcloud@v2
         with:
           version: 'latest'  # Consider specifying a stable version known to work locally
 
       - name: Log gcloud version
         run: gcloud --version
-
-      - name: Authenticate Google Cloud CLI
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - name: Set Google Cloud Project
         run: |
