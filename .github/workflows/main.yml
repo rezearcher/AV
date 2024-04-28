@@ -30,14 +30,8 @@ jobs:
       - name: Log gcloud version
         run: gcloud --version
 
-      - name: Verify project setting
-        run: gcloud config get-value project
-
       - name: Set Google Cloud Project
         run: gcloud config set project ${{ secrets.GCP_PROJECT }}
-
-      - run: gcloud config list project
-        name: Log current project
 
       - name: Deploy to Google Cloud Functions
         run: gcloud builds submit --config cloudbuild.yaml
@@ -46,9 +40,5 @@ jobs:
         if: failure()  # This step will run only if the previous step fails
         run: |
           echo "Deployment failed. Diagnostic information:"
-          echo "Checking authenticated accounts..."
-          gcloud auth list
-          echo "Showing recent projects..."
-          gcloud projects list
           echo "Detailed gcloud info:"
-          gcloud info
+          gcloud info --run-diagnostics
