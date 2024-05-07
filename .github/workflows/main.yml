@@ -25,7 +25,7 @@ jobs:
       - name: Setup Google Cloud CLI
         uses: google-github-actions/setup-gcloud@v2
         with:
-          version: 'latest'  # Consider specifying a stable version known to work locally
+          version: '473.0.0'  # Consider specifying a stable version known to work locally
 
       - name: Log gcloud version
         run: gcloud --version
