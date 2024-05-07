@@ -15,5 +15,5 @@ steps:
 
   # Deploy function
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['functions', 'deploy', 'MyFlaskFunction', '--runtime', 'python39', '--trigger-http', '--allow-unauthenticated', '--entry-point', 'main', '--source', '.']
+    args: ['functions', 'deploy', 'MyFlaskFunction', '--runtime', 'python39', '--trigger-http', '--allow-unauthenticated', '--entry-point', 'main', '--source', 'src']
 timeout: '1600s'
